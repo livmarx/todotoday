@@ -1,4 +1,4 @@
-const { db, User } = require('./backend/db');
+const { db, User, Event } = require('./backend/db');
 db.sync({ force: true }).then(() => {
   console.log('Database synced!!!');
   return User.bulkCreate([
@@ -7,9 +7,9 @@ db.sync({ force: true }).then(() => {
       email: 'claire@gmail.com',
       password: '1234',
       isAdmin: false,
-      invitedTo: [3, 4, 5, 6, 7],
-      attending: [3, 5, 7],
-      pastEvents: [1, 2],
+      invitedTo: [1, 4, 5, 6, 7],
+      attending: [1, 5, 7],
+      pastEvents: [2],
     },
     {
       name: 'Sarai',
@@ -66,6 +66,13 @@ db.sync({ force: true }).then(() => {
       pastEvents: [13, 14],
     },
   ])
+    .then(
+      Event.bulkCreate([
+        {
+          name: 'Drake',
+        },
+      ])
+    )
     .finally(() => {
       db.close();
     })

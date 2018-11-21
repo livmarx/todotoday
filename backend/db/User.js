@@ -1,6 +1,13 @@
 const Sequelize = require('sequelize');
 const { db } = require('./dbServer');
 
+const Event = db.define('event', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
@@ -25,14 +32,14 @@ const User = db.define('user', {
   invitedTo: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
   },
-  // attending: {
-  //   type: Sequelize.ARRAY,
-  // },
-  // pastEvents: {
-  //   type: Sequelize.ARRAY,
-  // },
+  attending: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  },
+  pastEvents: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  },
 });
 
 // how are we associating user w other users? User.belongsTo(User)? dont want all users associated..?
 
-module.exports = { User };
+module.exports = { User, Event };

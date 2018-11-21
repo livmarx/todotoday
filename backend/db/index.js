@@ -3,7 +3,8 @@ const { db } = require('./dbServer');
 
 // Defining Models:
 // const { ToDo } = require('./ToDo');
-const { User } = require('./User');
+const { User, Event } = require('./User');
+//const { Event } = require('./User');
 // const { List } = require('./List');
 
 // Associations
@@ -13,4 +14,4 @@ const { User } = require('./User');
 // User.hasOne(List);
 // List.belongsTo(User);
 
-module.exports = { db, User };
+module.exports = { db, User, Event };
