@@ -1,17 +1,15 @@
 import React from 'react';
-import SingleTodo from './SingleTodo';
+import Map from './Map';
+import EventbrightAPI from './EventbrightAPI';
+
+import axios from 'axios';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   render() {
     return (
       <div>
-        <h1>LIST</h1>
-        <SingleTodo />
+        {/* <Map /> */}
+        <EventbrightAPI />
       </div>
     );
   }
