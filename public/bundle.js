@@ -112,46 +112,74 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EventbrightAPI = function (_React$Component) {
-  _inherits(EventbrightAPI, _React$Component);
+var Test = function (_React$Component) {
+  _inherits(Test, _React$Component);
 
-  function EventbrightAPI() {
-    _classCallCheck(this, EventbrightAPI);
+  function Test() {
+    _classCallCheck(this, Test);
 
-    var _this = _possibleConstructorReturn(this, (EventbrightAPI.__proto__ || Object.getPrototypeOf(EventbrightAPI)).call(this));
+    var _this = _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this));
 
     _this.state = {
       users: [],
+      toilets: [],
       isLoaded: false
     };
     return _this;
   }
 
-  _createClass(EventbrightAPI, [{
+  _createClass(Test, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var res, toilets;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _axios2.default.get('/api/toilets');
 
-      fetch('https://jsonplaceholder.typicode.com/users').then(function (res) {
-        return res.json();
-      }).then(function (json) {
-        _this2.setState({
-          isLoaded: true,
-          user: json
-        });
-      });
-    }
+              case 2:
+                res = _context.sent;
+                toilets = res.data;
+
+                console.log('res.date: ', toilets);
+                console.log('this.state before setState: ', this.state);
+                this.setState({
+                  toilets: toilets,
+                  isLoaded: true
+                });
+                console.log('this.state after setState: ', this.state);
+
+              case 8:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentDidMount() {
+        return _ref.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
   }, {
     key: 'render',
     value: function render() {
       var _state = this.state,
           isLoaded = _state.isLoaded,
+          toilets = _state.toilets,
           users = _state.users;
 
       if (!isLoaded) {
@@ -163,7 +191,7 @@ var EventbrightAPI = function (_React$Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'eventbright' },
+          null,
           _react2.default.createElement(
             'h1',
             null,
@@ -177,13 +205,18 @@ var EventbrightAPI = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            users
+            this.state.toilets
           ),
-          users.map(function (user) {
+          toilets.map(function (toilet) {
             return _react2.default.createElement(
               'li',
-              { key: user.id },
-              'user.name'
+              { key: toilet.id },
+              toilet.id,
+              _react2.default.createElement(
+                'p',
+                null,
+                toilet.address
+              )
             );
           }),
           _react2.default.createElement(
@@ -196,10 +229,10 @@ var EventbrightAPI = function (_React$Component) {
     }
   }]);
 
-  return EventbrightAPI;
+  return Test;
 }(_react2.default.Component);
 
-exports.default = EventbrightAPI;
+exports.default = Test;
 
 /***/ }),
 
