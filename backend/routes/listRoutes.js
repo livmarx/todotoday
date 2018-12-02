@@ -1,30 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
-const { db, List, Todo, User } = require('../db/index');
+const { db, Toilet, Comment, User } = require('../db/index');
 
 // Get all users
 router.get('/', async function(req, res, next) {
   try {
-    const allLists = await List.findAll();
-    console.log('All Lists!');
-    res.status(200).send(allLists);
+    const allToilet = await Toilet.findAll();
+    console.log('All Toilets!');
+    res.status(200).send(allToilet);
   } catch (error) {
     next(error);
   }
 });
 
-// Get particular user's list by the user's id
-router.get('/:userId', async function(req, res, next) {
+// Get particular toilet
+router.get('/:toiletId', async function(req, res, next) {
   try {
-    const id = req.params.userId;
-    const particularUsersList = await List.findAll({
-      where: {
-        userId: id,
-      },
-    });
-    console.log('Particular User List!');
-    res.status(200).send(particularUsersList);
+    const id = req.params.toiletId;
+    const particularUsersToilet = await Toilet.findById(id);
+    console.log('Particular Toilet!');
+    res.status(200).send(particularUsersToilet);
   } catch (error) {
     next(error);
   }
@@ -33,8 +29,10 @@ router.get('/:userId', async function(req, res, next) {
 // // Create a list
 router.post('/', async function(req, res, next) {
   try {
-    const newList = await List.create(req.body);
-    res.status(201).send({ message: 'Made new list! Woo!', newList: newList });
+    const newToilet = await Toilet.create(req.body);
+    res
+      .status(201)
+      .send({ message: 'Made new Toilet! Woo!', newList: newToilet });
   } catch (error) {
     next(error);
   }
@@ -43,11 +41,11 @@ router.post('/', async function(req, res, next) {
 // Update particular list
 router.put('/:id', async function(req, res, next) {
   try {
-    const listToUpdate = await List.findById(req.params.id);
-    const updatedList = await listToUpdate.update(req.body);
+    const toiletToUpdate = await Toilet.findById(req.params.id);
+    const updatedToilet = await toiletToUpdate.update(req.body);
     res
       .status(201)
-      .send({ message: 'Made new user! Woo!', updatedList: updatedList });
+      .send({ message: 'Updated a Toilet! Woo!', updatedList: updatedToilet });
   } catch (error) {
     next(error);
   }

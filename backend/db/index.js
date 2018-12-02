@@ -10,10 +10,6 @@ const { User, Toilet, Comment } = require('./User');
 // const { List } = require('./List');
 
 // Associations
-// UserToilets = Sequelize.define('user_toilets', {});
-
-// Toilet.belongsToMany(User, { through: UserToilet });
-// User.belongsToMany(Toilet, { through: UserToilet });
 
 Comment.belongsTo(User);
 User.hasMany(Comment);
