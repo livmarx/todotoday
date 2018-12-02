@@ -72,15 +72,15 @@ db.sync({ force: true }).then(() => {
       Comment.bulkCreate([
         {
           content: 'Super nice house, a little out of the way. Small bathroom',
-          userId: 2,
+          // userId: 2,
         },
         {
           content: 'Chaotic, whimsical house. Clean bathroom. Near to T',
-          userId: 4,
+          // userId: 4,
         },
         {
           content: 'On 25th floor. Takes a while to get up there.',
-          userId: 6,
+          // userId: 6,
         },
       ])
     )

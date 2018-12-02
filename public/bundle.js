@@ -140,7 +140,7 @@ var Test = function (_React$Component) {
     key: 'componentDidMount',
     value: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var res, toilets;
+        var resT, resU, toilets, users;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -149,18 +149,27 @@ var Test = function (_React$Component) {
                 return _axios2.default.get('/api/toilets');
 
               case 2:
-                res = _context.sent;
-                toilets = res.data;
+                resT = _context.sent;
+                _context.next = 5;
+                return _axios2.default.get('/api/users');
+
+              case 5:
+                resU = _context.sent;
+                toilets = resT.data;
+                users = resU.data;
 
                 console.log('res.date: ', toilets);
                 console.log('this.state before setState: ', this.state);
+
                 this.setState({
                   toilets: toilets,
+                  users: users,
                   isLoaded: true
                 });
+
                 console.log('this.state after setState: ', this.state);
 
-              case 8:
+              case 12:
               case 'end':
                 return _context.stop();
             }
@@ -195,35 +204,45 @@ var Test = function (_React$Component) {
           _react2.default.createElement(
             'h1',
             null,
-            'Eventbright API testing'
+            'Flush'
           ),
           _react2.default.createElement(
             'p',
             null,
-            'DATA HAS BEEN LOADED'
+            'DATA HAS BEEN LOADED!'
           ),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            'p',
+            'h4',
             null,
-            this.state.toilets
+            'Toilets:'
           ),
           toilets.map(function (toilet) {
             return _react2.default.createElement(
-              'li',
+              'div',
               { key: toilet.id },
+              'ID: ',
               toilet.id,
-              _react2.default.createElement(
-                'p',
-                null,
-                toilet.address
-              )
+              ', Address: ',
+              toilet.address
             );
           }),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
-            'p',
+            'h4',
             null,
-            ' just more '
-          )
+            'Users:'
+          ),
+          users.map(function (user) {
+            return _react2.default.createElement(
+              'div',
+              { key: user.id },
+              'ID: ',
+              user.id,
+              ', Name: ',
+              user.name
+            );
+          })
         );
       }
     }

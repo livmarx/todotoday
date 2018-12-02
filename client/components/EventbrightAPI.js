@@ -12,14 +12,19 @@ class Test extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get('/api/toilets');
-    const toilets = res.data;
+    const resT = await axios.get('/api/toilets');
+    const resU = await axios.get('/api/users');
+    const toilets = resT.data;
+    const users = resU.data;
     console.log('res.date: ', toilets);
     console.log('this.state before setState: ', this.state);
+
     this.setState({
-      toilets: toilets,
+      toilets,
+      users,
       isLoaded: true,
     });
+
     console.log('this.state after setState: ', this.state);
   }
 
@@ -30,18 +35,26 @@ class Test extends React.Component {
     } else {
       return (
         <div>
-          <h1>Eventbright API testing</h1>
-          <p>DATA HAS BEEN LOADED</p>
-          <p>{this.state.toilets}</p>
+          <h1>Flush</h1>
+          <p>DATA HAS BEEN LOADED!</p>
+          <br />
+          <h4>Toilets:</h4>
           {toilets.map(toilet => {
             return (
-              <li key={toilet.id}>
-                {toilet.id}
-                <p>{toilet.address}</p>
-              </li>
+              <div key={toilet.id}>
+                ID: {toilet.id}, Address: {toilet.address}
+              </div>
             );
           })}
-          <p> just more </p>
+          <br />
+          <h4>Users:</h4>
+          {users.map(user => {
+            return (
+              <div key={user.id}>
+                ID: {user.id}, Name: {user.name}
+              </div>
+            );
+          })}
         </div>
       );
     }
