@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchToilets, fetchUsers } from '../store/reducer';
 
 class Test extends React.Component {
   constructor() {
@@ -12,20 +14,24 @@ class Test extends React.Component {
   }
 
   async componentDidMount() {
-    const resT = await axios.get('/api/toilets');
-    const resU = await axios.get('/api/users');
-    const toilets = resT.data;
-    const users = resU.data;
-    console.log('res.date: ', toilets);
-    console.log('this.state before setState: ', this.state);
+    this.props.fetchToilets();
+    this.props.fetchUsers();
 
-    this.setState({
-      toilets,
-      users,
-      isLoaded: true,
-    });
+    ///// BEFORE REDUX:
+    // const resT = await axios.get('/api/toilets');
+    // const resU = await axios.get('/api/users');
+    // const toilets = resT.data;
+    // const users = resU.data;
+    // console.log('res.date: ', toilets);
+    // console.log('this.state before setState: ', this.state);
 
-    console.log('this.state after setState: ', this.state);
+    // this.setState({
+    //   toilets,
+    //   users,
+    //   isLoaded: true,
+    // });
+
+    // console.log('this.state after setState: ', this.state);
   }
 
   render() {
@@ -39,7 +45,7 @@ class Test extends React.Component {
           <p>DATA HAS BEEN LOADED!</p>
           <br />
           <h4>Toilets:</h4>
-          {toilets.map(toilet => {
+          {this.props.toilets.map(toilet => {
             return (
               <div key={toilet.id}>
                 ID: {toilet.id}, Address: {toilet.address}
@@ -48,7 +54,7 @@ class Test extends React.Component {
           })}
           <br />
           <h4>Users:</h4>
-          {users.map(user => {
+          {this.props.users.map(user => {
             return (
               <div key={user.id}>
                 ID: {user.id}, Name: {user.name}
@@ -61,4 +67,22 @@ class Test extends React.Component {
   }
 }
 
-export default Test;
+const mapStateToProps = state => {
+  return { toilets: state.toilets, users: state.users };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUsers: () => {
+      dispatch(fetchUsers());
+    },
+    fetchToilets: () => {
+      dispatch(fetchToilets());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Test);
