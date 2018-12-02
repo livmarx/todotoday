@@ -26,7 +26,6 @@ router.get('/:id', async function(req, res, next) {
   }
 });
 
-
 // Create a user
 router.post('/', async function(req, res, next) {
   try {
@@ -60,15 +59,15 @@ router.put('/:id', async function(req, res, next) {
 });
 // what is the point of listing out the variable vs req.body? id see any change when post (via postman). tried posting variable not listed and worked. tried not including variables listed and worked... ?.
 
-User.prototype.confirm = function(eventId){
-  let indxOfEvent = index of eventId
-  if(indxOfEvent !== -1){
-    this.invitedTo.slice(indxOfEvent..)
-    this.attending.push(eventId).sort
-  } else {
-    console.log('not invited to particular event')
-  }
-  // if eventId is in invitedTo array copy into variable, remove from invited to, and push into attending
-}
+// User.prototype.confirm = function(eventId){
+//   let indxOfEvent = index of eventId
+//   if(indxOfEvent !== -1){
+//     this.invitedTo.slice(indxOfEvent..)
+//     this.attending.push(eventId).sort
+//   } else {
+//     console.log('not invited to particular event')
+//   }
+// if eventId is in invitedTo array copy into variable, remove from invited to, and push into attending
+// }
 
 module.exports = router;

@@ -1,10 +1,36 @@
 const Sequelize = require('sequelize');
 const { db } = require('./dbServer');
 
-const Event = db.define('event', {
-  name: {
+const Comment = db.define('comment', {
+  content: {
+    type: Sequelize.TEXT,
+  },
+});
+
+const Toilet = db.define('toilet', {
+  address: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  latitude: {
+    type: Sequelize.BIGINT,
+    // allowNull: false,
+  },
+  longitude: {
+    type: Sequelize.BIGINT,
+    // allowNull: false,
+  },
+  toiletType: {
+    type: Sequelize.ENUM,
+    values: ['Public', 'In-Store', 'In-Home'],
+  },
+  priceRange: {
+    type: Sequelize.ENUM,
+    values: ['$', '$$', '$$$', '$$$$'],
+  },
+  rating: {
+    type: Sequelize.ENUM,
+    values: ['1', '2', '3', '4', '5'],
   },
 });
 
@@ -29,17 +55,6 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
   },
-  invitedTo: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-  },
-  attending: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-  },
-  pastEvents: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-  },
 });
 
-// how are we associating user w other users? User.belongsTo(User)? dont want all users associated..?
-
-module.exports = { User, Event };
+module.exports = { User, Toilet, Comment };
