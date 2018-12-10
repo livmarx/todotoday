@@ -1,87 +1,89 @@
-const { db, List, ToDo, User } = require('./backend/db');
+const { db, User, Toilet, Comment } = require('./backend/db');
 db.sync({ force: true }).then(() => {
   console.log('Database synced!!!');
   return User.bulkCreate([
     {
       name: 'Claire',
       email: 'claire@gmail.com',
+      password: '1234',
+      isAdmin: false,
     },
     {
       name: 'Sarai',
       email: 'sarai@gmail.com',
+      password: '567',
+      isAdmin: false,
     },
     {
       name: 'Mary',
       email: 'mary@gmail.com',
+      password: '567',
+      isAdmin: false,
     },
+
     {
       name: 'Steve',
       email: 'steve@gmail.com',
+      password: '567',
+      isAdmin: false,
+    },
+    {
+      name: 'Maggie',
+      email: 'mags@gmail.com',
+      password: '1010',
+      isAdmin: true,
+    },
+    {
+      name: 'Uma',
+      email: 'ums@gmail.com',
+      password: '2020',
+      isAdmin: true,
+    },
+    {
+      name: 'Maria',
+      email: 'mars@gmail.com',
+      password: '3030',
+      isAdmin: true,
     },
   ])
-    .then(() => {
-      List.bulkCreate([
+    .then(
+      Toilet.bulkCreate([
         {
-          userId: 1,
+          address: '171 School Street, Roxbury, MA 02119',
+          toiletType: 'In-Home',
+          priceRange: '$$',
+          rating: '4',
         },
         {
-          userId: 2,
+          address: '38 Bracebridge Road, Newton, MA 02119',
+          toiletType: 'In-Home',
+          priceRange: '$$$',
+          rating: '3',
         },
         {
-          userId: 3,
+          address: '5 Hanover Square, New York, NY 10002',
+          toiletType: 'In-Store',
+          priceRange: '$$',
+          rating: '3',
+        },
+      ])
+    )
+    .then(
+      Comment.bulkCreate([
+        {
+          content: 'Super nice house, a little out of the way. Small bathroom',
+          // userId: 2,
         },
         {
-          userId: 4,
-        },
-      ]);
-    })
-    .then(() => {
-      return ToDo.bulkCreate([
-        {
-          title: 'Walk the dogs',
-          expectedTime: 45.0,
-          location: 'Franklin Park',
-          phone: null,
-          email: null,
-          details: "Remember to bring bags, treats and Moqi's ball",
-          completed: false,
-          listId: 2,
+          content: 'Chaotic, whimsical house. Clean bathroom. Near to T',
+          // userId: 4,
         },
         {
-          title: 'Drop Sarai off at playdate',
-          expectedTime: 20.0,
-          location: '800 Center Street, Jamaica Plain, MA 02130',
-          phone: '+1-(617)-595-5288',
-          details:
-            'Child name is Victoria, dad name is John. Know each other from soccer. Even allergic to peanuts',
-          completed: false,
-          listId: 1,
+          content: 'On 25th floor. Takes a while to get up there.',
+          // userId: 6,
         },
-        {
-          title: 'Clean room',
-          expectedTime: 60.0,
-          completed: false,
-          listId: 1,
-        },
-        {
-          title: 'Book doctors appointment for Claire',
-          expectedTime: null,
-          location: '44 Court Street, Brooklyn, NY 11201',
-          phone: '+1-(212) 965-7000',
-          details: 'She can only do afternoon appointments after 3pm',
-          completed: false,
-          listId: 3,
-        },
-        {
-          title: 'Grade exams',
-          expectedTime: 90,
-          location: null,
-          details: 'Try to finish before Sarai and CLaire get home',
-          completed: false,
-          listId: 4,
-        },
-      ]);
-    })
+      ])
+    )
     .finally(() => {
       db.close();
     })
@@ -89,3 +91,13 @@ db.sync({ force: true }).then(() => {
       console.log(`Oh no! We have an error: ${err}!!!`);
     });
 });
+
+// {
+//   content: 'Super nice house, a little out of the way. Small bathroom'
+// },
+// {
+//   content: 'Chaotic, whimsical house. Clean bathroom. Near to T'
+// },
+// {
+//   content: 'On 25th floor. Takes a while to get up there.'
+// },

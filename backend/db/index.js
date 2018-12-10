@@ -1,16 +1,20 @@
 // Access to database:
+
 const { db } = require('./dbServer');
+const Sequelize = require('sequelize');
 
 // Defining Models:
-const { ToDo } = require('./ToDo');
-const { User } = require('./User');
-const { List } = require('./List');
+// const { ToDo } = require('./ToDo');
+const { User, Toilet, Comment } = require('./User');
+//const { Event } = require('./User');
+// const { List } = require('./List');
 
 // Associations
-ToDo.belongsTo(List);
-List.hasMany(ToDo);
 
-User.hasOne(List);
-List.belongsTo(User);
+Comment.belongsTo(User);
+User.hasMany(Comment);
 
-module.exports = { db, List, ToDo, User };
+Toilet.hasMany(Comment);
+Comment.belongsTo(Toilet);
+
+module.exports = { db, User, Toilet, Comment };

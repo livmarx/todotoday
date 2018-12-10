@@ -17,20 +17,6 @@ app.use(express.static(__dirname + '/public'));
 // Routes
 app.use('/api', require('./backend/routes/index'));
 
-// app.get('/', function(req, res, next) {
-//   try {
-//     // I will want to re-direct to other routes
-//     console.log(
-//       'Hazzah! We have made successfully made a GET request through our foraged slash route!'
-//     );
-//     res.send(
-//       'Hazzah! We have made successfully made a GET request through our foraged slash route!'
-//     );
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 const PORT = 8080;
 
 const init = async function() {

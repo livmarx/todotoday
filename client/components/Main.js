@@ -1,17 +1,12 @@
+'use strict';
 import React from 'react';
-import SingleTodo from './SingleTodo';
+import EventbrightAPI from './EventbrightAPI';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   render() {
     return (
       <div>
-        <h1>LIST</h1>
-        <SingleTodo />
+        <EventbrightAPI />
       </div>
     );
   }
