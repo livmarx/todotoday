@@ -345,10 +345,6 @@ var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/i
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Main = __webpack_require__(/*! ./components/Main */ "./client/components/Main.js");
-
-var _Main2 = _interopRequireDefault(_Main);
-
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
@@ -356,6 +352,10 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 var _store = __webpack_require__(/*! ./store/store */ "./client/store/store.js");
 
 var _store2 = _interopRequireDefault(_store);
+
+var _Main = __webpack_require__(/*! ./components/Main */ "./client/components/Main.js");
+
+var _Main2 = _interopRequireDefault(_Main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
